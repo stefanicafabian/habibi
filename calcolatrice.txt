@@ -1,0 +1,398 @@
+//cpp
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <cmath>
+#include <limits>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+const double pi = 3.14159265358979323846;
+vector<string> cronologia;
+
+// D
+void easteregg(double numero) {
+    if (numero == 67) {
+        cout << "\nsix sevennnnn!!! 🗣️💀\n";
+    } else if (numero == 69) {
+        cout << "\nnice. 🗿\n";
+    } else if (numero == 420) {
+        cout << "\nmoDalita' botanica 🌿💀\n";
+    } else if (numero == 404) {
+        cout << "\nerror 404: brain not found 🤖\n";
+    } else if (numero == 80085) {
+        cout << "\nattenzione alle maiuscole habibi\n";
+    } else if (numero == 42) {
+        cout << "\nla risposta alla vita, all'universo e a tutto. 🗿\n";
+    } else if (numero == 1000000) {
+        cout << "\nmillionaire arc unlocked 💸\n";
+    } else if (numero == 0) {
+        cout << "\nzero assoluto. modalita' npc.\n";
+    }
+}
+
+// A
+void mostra_risultato(double risultato, const string& operazione) {
+    cout << "\nrisultato: "
+         << setprecision(12) << risultato << "\n";
+
+    cronologia.push_back(operazione + " = " + to_string(risultato));
+    easteregg(risultato);
+}
+
+double leggi_numero(const string& messaggio) {
+    double numero;
+
+    while (true) {
+        cout << messaggio;
+
+        if (cin >> numero && isfinite(numero))
+            return numero;
+
+        cout << "brooo 😭 inserisci un numero valido!\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
+void operazioni_base() {
+    cout << "\n1. addizione (+)\n";
+    cout << "2. sottrazione (-)\n";
+    cout << "3. moltiplicAzione (*)\n";
+    cout << "4. divisione (/)\n";
+
+    int scelta;
+    cout << "\nscegli operazione: ";
+
+    if (!(cin >> scelta)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "input sussy 💀\n";
+        return;
+    }
+
+    if (scelta < 1 || scelta > 4) {
+        cout << "bro ha scelto il nulla 💀\n";
+        return;
+    }
+
+    double a = leggi_numero("primo numero: ");
+    double b = leggi_numero("secondo numero: ");
+    double risultato = 0;
+    string operazione;
+
+    switch (scelta) {
+        case 1:
+            risultato = a + b;
+            operazione = "+";
+            break;
+        case 2:
+            risultato = a - b;
+            operazione = "-";
+            break;
+        case 3:
+            risultato = a * b;
+            operazione = "*";
+            break;
+        case 4:
+            if (b == 0) {
+                cout << "\nbro ha diviso per zero 💀\n";
+                return;
+            }
+            risultato = a / b;
+            operazione = "/";
+            break;
+    }
+
+    if (!isfinite(risultato)) {
+        cout << "risultato fuori dai limiti Numerici.\n";
+        return;
+    }
+
+    mostra_risultato(risultato,
+        to_string(a) + " " + operazione + " " + to_string(b));
+}
+
+// N
+void operazioni_avanzate() {
+    cout << "\n1. potenza (a^b)\n";
+    cout << "2. radice quadrata\n";
+    cout << "3. modulo intero (%)\n";
+    cout << "4. percentuale\n";
+    cout << "5. seno (gradi)\n";
+    cout << "6. coseno (gradi)\n";
+    cout << "7. tangente (gradi)\n";
+    cout << "8. logaritmo naturale (ln)\n";
+    cout << "9. valore assoluto\n";
+    cout << "10. inverso (1/x)\n";
+    cout << "11. pi greco\n";
+
+    int scelta;
+    cout << "\nscegli: ";
+
+    if (!(cin >> scelta)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "bro, inpuT in crisi 😭\n";
+        return;
+    }
+
+    double a, b, risultato = 0;
+    string operazione;
+
+    switch (scelta) {
+        case 1:
+            a = leggi_numero("base: ");
+            b = leggi_numero("esponente: ");
+            risultato = pow(a, b);
+            operazione = "potenza";
+            break;
+
+        case 2:
+            a = leggi_numero("numero: ");
+            if (a < 0) {
+                cout << "radice reale impossibile.\n";
+                return;
+            }
+            risultato = sqrt(a);
+            operazione = "sqrt";
+            break;
+
+        case 3: {
+            long long x, y;
+
+            cout << "primo intero: ";
+            if (!(cin >> x)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "intero non valido.\n";
+                return;
+            }
+
+            cout << "secondo intero: ";
+            if (!(cin >> y)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "intero non valido.\n";
+                return;
+            }
+
+            if (y == 0) {
+                cout << "modulo per zero? bro no 💀\n";
+                return;
+            }
+
+            if (x == numeric_limits<long long>::min() && y == -1) {
+                cout << "risultato fuori intervallo.\n";
+                return;
+            }
+
+            risultato = static_cast<double>(x % y);
+            operazione = "modulo";
+            break;
+        }
+
+        case 4:
+            a = leggi_numero("percentuale: ");
+            b = leggi_numero("numero di riferimento: ");
+            risultato = a * b / 100.0;
+            operazione = "percentuale";
+            break;
+
+        case 5:
+        case 6:
+        case 7: {
+            a = leggi_numero("angolo in gradi: ");
+            double radianti = a * pi / 180.0;
+
+            if (scelta == 5) {
+                risultato = sin(radianti);
+                operazione = "sin";
+            } else if (scelta == 6) {
+                risultato = cos(radianti);
+                operazione = "cos";
+            } else {
+                if (fabs(cos(radianti)) < 1e-12) {
+                    cout << "tangente non definita.\n";
+                    return;
+                }
+                risultato = tan(radianti);
+                operazione = "tan";
+            }
+            break;
+        }
+
+        case 8:
+            a = leggi_numero("numero: ");
+            if (a <= 0) {
+                cout << "ln richiede un numero positivo.\n";
+                return;
+            }
+            risultato = log(a);
+            operazione = "ln";
+            break;
+
+        case 9:
+            a = leggi_numero("numero: ");
+            risultato = fabs(a);
+            operazione = "abs";
+            break;
+
+        case 10:
+            a = leggi_numero("numero: ");
+            if (a == 0) {
+                cout << "l'inverso di zero non esiste 💀\n";
+                return;
+            }
+            risultato = 1.0 / a;
+            operazione = "inverso";
+            break;
+
+        case 11:
+            risultato = pi;
+            operazione = "pi greco";
+            break;
+
+        default:
+            cout << "scelta non valida, skill issue.\n";
+            return;
+    }
+
+    if (!isfinite(risultato)) {
+        cout << "risultato fuori dai limiti numerici.\n";
+        return;
+    }
+
+    mostra_risultato(risultato, operazione);
+}
+
+// T
+void menu_segreto() {
+    cout << "\nsecret lore menu 🔒💀\n";
+    cout << "1. modalita' npc\n";
+    cout << "2. test del rizz\n";
+    cout << "3. generatore di complimenti goofy\n";
+    cout << "4. torna indietro\n";
+
+    int scelta;
+    cout << "\nscelta: ";
+
+    if (!(cin >> scelta)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "il menu ha perso aura.\n";
+        return;
+    }
+
+    switch (scelta) {
+        case 1:
+            cout << "\nmodalita' npc attivata\n";
+            cout << "mmm. si'. certo. interessante.\n";
+            cout << "hai parlato con un muro con wi-fi. 💀\n";
+            break;
+
+        case 2: {
+            int rizz = rand() % 101;
+            cout << "\nil tuo livello di rizz: " << rizz << "/100\n";
+
+            if (rizz < 25)
+                cout << "carisma di una patata. 🥔\n";
+            else if (rizz < 50)
+                cout << "rizz in aggiornamento... 💀\n";
+            else if (rizz < 80)
+                cout << "lowkey hai del potenziale. 👀\n";
+            else
+                cout << "rizzler leggendario. aura +9999 🗿\n";
+            break;
+        }
+
+        case 3: {
+            const string complimenti[] = {
+                "sei piu' raro di un tutorial senza sponsor.",
+                "la tua aura ha bisogno di una patente.",
+                "sei il main character di una sitcom.",
+                "hai piu' plot twist di una serie netflix.",
+                "il tuo wi-fi emotivo prende benissimo."
+            };
+
+            cout << "\n" << complimenti[rand() % 5] << "\n";
+            break;
+        }
+
+        case 4:
+            return;
+
+        default:
+            cout << "scelta non canonica. 💀\n";
+    }
+}
+
+void mostra_cronologia() {
+    cout << "\ncronologia calcoli 📜\n";
+
+    if (cronologia.empty()) {
+        cout << "ancora niente calcoli. 😭\n";
+        return;
+    }
+
+    for (size_t i = 0; i < cronologia.size(); ++i)
+        cout << i + 1 << ". " << cronologia[i] << "\n";
+}
+
+int main() {
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    int scelta;
+
+    while (true) {
+        cout << "\n========================================\n";
+        cout << "rizz calculator v1.0 💀\n";
+        cout << "la matematica, ma con l'aura.\n\n";
+        cout << "1. operazioni base\n";
+        cout << "2. opErazioni avanzate 🤓\n";
+        cout << "3. cronologia 📜\n";
+        cout << "4. secret lore menu 🔒\n";
+        cout << "5. easter egg scanner 👀\n";
+        cout << "0. esci dalla simulazione\n";
+        cout << "\nscegli un'opzione: ";
+
+        if (!(cin >> scelta)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "bro ha inserito un tasto sussy 💀\n";
+            continue;
+        }
+
+        switch (scelta) {
+            case 1:
+                operazioni_base();
+                break;
+            case 2:
+                operazioni_avanzate();
+                break;
+            case 3:
+                mostra_cronologia();
+                break;
+            case 4:
+                menu_segreto();
+                break;
+            case 5: {
+                double numero = leggi_numero("inserisci un numero segreto: ");
+                easteregg(numero);
+                break;
+            }
+            case 0:
+                cout << "\ngg ez. grazie per aver giocato. 🗿\n";
+                return 0;
+            default:
+                cout << "scelta non valida. bro ha preso l. 💀\n";
+        }
+
+        cout << "\npremi invio per continuare...";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.get();
+    }
+}
