@@ -13,7 +13,7 @@ using namespace std;
 const double pi = 3.14159265358979323846;
 vector<string> cronologia;
 
-// D
+
 void easteregg(double numero) {
     if (numero == 67) {
         cout << "\nsix sevennnnn!!! 🗣️💀\n";
@@ -34,7 +34,7 @@ void easteregg(double numero) {
     }
 }
 
-// A
+
 void mostra_risultato(double risultato, const string& operazione) {
     cout << "\nrisultato: "
          << setprecision(12) << risultato << "\n";
@@ -116,7 +116,7 @@ void operazioni_base() {
         to_string(a) + " " + operazione + " " + to_string(b));
 }
 
-// N
+
 void operazioni_avanzate() {
     cout << "\n1. potenza (a^b)\n";
     cout << "2. radice quadrata\n";
@@ -269,7 +269,7 @@ void operazioni_avanzate() {
     mostra_risultato(risultato, operazione);
 }
 
-// T
+
 void menu_segreto() {
     cout << "\nsecret lore menu 🔒💀\n";
     cout << "1. modalita' npc\n";
