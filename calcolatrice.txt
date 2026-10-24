@@ -24,7 +24,7 @@ void easteregg(double numero) {
     } else if (numero == 404) {
         cout << "\nerror 404: brain not found 🤖\n";
     } else if (numero == 80085) {
-        cout << "\nattenzione alle maiuscole habibi\n";
+        cout << "\nil codice non è di among us ma è sus\n";
     } else if (numero == 42) {
         cout << "\nla risposta alla vita, all'universo e a tutto. 🗿\n";
     } else if (numero == 1000000) {
